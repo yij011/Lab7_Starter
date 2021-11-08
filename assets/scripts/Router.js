@@ -67,7 +67,7 @@ export class Router {
      *  4. Finally, call the stored function for the given page
      */
     if(typeof this[page] != 'function') {
-      console.log('Error page not defined');
+      console.log('Error page not defined (function)');
       return;
     }
     
@@ -81,7 +81,7 @@ export class Router {
         hash = '#' + page;
       }
       // step 3
-      if((statePopped == 'False') && (window.location.hash != hash)) {
+      if((statePopped == false) && (window.location.hash != hash)) {
         history.pushState(page, window.location.href, hash);
       }
       // step 4
@@ -89,7 +89,7 @@ export class Router {
     }
     // step 1
     else{
-      console.log('Error page not defined');
+      console.log('Error page not defined (undefined)');
       return;
     }
   }
