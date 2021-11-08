@@ -38,6 +38,7 @@ export class Router {
      * router instance using the 'this' keyword. Substitute 'home' for the variable
      * page
      */
+     this[page] = pageFunc;
   }
 
   /**
@@ -65,5 +66,31 @@ export class Router {
      *     and URL + hash to history
      *  4. Finally, call the stored function for the given page
      */
+    if(typeof this[page] != 'function') {
+      console.log('Error page not defined');
+      return;
+    }
+    
+    if(this[page] != undefined){
+      // step 2
+      let hash;
+      if(page == 'home'){
+        hash = '';
+      }
+      else{
+        hash = '#' + page;
+      }
+      // step 3
+      if((statePopped == 'False') && (window.location.hash != hash)) {
+        history.pushState(page, window.location.href, hash);
+      }
+      // step 4
+      this[page]();
+    }
+    // step 1
+    else{
+      console.log('Error page not defined');
+      return;
+    }
   }
 }
